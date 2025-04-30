@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tumkadraw.ru</title>
+    <style>
+        body{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+        }
+        h1{
+            margin-bottom: 30px;
+        }
+        .square{
+            width: 20px;
+            height: 20px;
+            border: 2px solid gray;
+            cursor: pointer;
+        }
+        .square.active{
+            background-color: rgb(255, 195, 205);
+        }
+        .Board{
+            display: grid;
+            grid-template-columns: repeat(12, 20px);
+            grid-template-rows: repeat(17, 20px);
+            gap: 3px;
+        }
+        button{
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Draw your favorite things</h1>
+    <div class="Board" id="Board">
+    </div>
+    <button onclick="clearBoard()">Dont Erase</button>
+    <script>
+        const board=document.getElementById("Board")
+        for (
+            let i=0; i<204; i++
+        ){
+            const square=document.createElement('div')
+            square.classList.add('square')
+            square.addEventListener('click',() => {
+                square.classList.toggle('active')
+            })
+            board.appendChild(square)
+        }
+        function clearBoard(){
+            document.querySelectorAll('.square').forEach(
+                (sq) => {
+                    sq.classList.remove('active')
+                }
+            )
+        }
+    </script>
+</body>
+</html>
