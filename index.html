@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tumkadraw.ru</title>
+    <style>
+        body{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+        }
+        h1{
+            margin-bottom: 30px;
+        }
+        .square{
+            width: 20px;
+            height: 20px;
+            border: 2px solid gray;
+            cursor: pointer;
+        }
+        .square.active{
+            background-color: rgb(255, 195, 205);
+        }
+        .Board{
+            display: grid;
+            grid-template-columns: repeat(12, 20px);
+            grid-template-rows: repeat(17, 20px);
+            gap: 3px;
+        }
+        button{
+            margin-top: 5px;
+        }
+        .version{
+            color: rgb(141, 141, 141);
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+        }
+        .color-picker{
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #rgb{
+            width: 40px;
+            height: 40px;
+            border: none;
+        }
+        #ers{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
+        .ers-active{
+            background-color: chocolate !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>Draw your favorite things</h1>
+    <div class="Board" id="Board">
+    </div>
+    <div class="color-picker">
+        <input type="color" id="rgb" onchange="dYC(this.value)">
+        <p>choose your color. :)</p>
+        <button id="ers" onclick="ff()">eraser</button>
+    </div>
+    <button onclick="clearBoard()">Dont Erase</button>
+    <h6 class="version">v1.0.1</h6>
+    <script>
+        const board=document.getElementById("Board")
+        let keepColor='black'
+        for (
+            let i=0; i<204; i++
+        ){
+            const square=document.createElement('div')
+            square.classList.add('square')
+            square.addEventListener('click',() => {
+                square.style.backgroundColor=keepColor
+            })
+            board.appendChild(square)
+        }
+        function clearBoard(){
+            document.querySelectorAll('.square').forEach(
+                (sq) => {
+                    sq.style.backgroundColor='white'
+                }
+            )
+        }
+        function dYC(color) {
+            keepColor=color
+        }
+        const ersBtn=document.getElementById('ers')
+        let isErasing=false
+        function ff() {
+            isErasing=!isErasing
+            if (isErasing) {
+                keepColor='white'
+                console.log('done')
+                ersBtn.classList.toggle('ers-active')
+            }
+           else{
+            let currentColor=document.getElementById('rgb').value
+            keepColor=currentColor
+            ersBtn.classList.toggle('ers-active')
+           }
+
+
+
+        }
+    </script>
+</body>
+</html>
